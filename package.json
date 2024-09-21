@@ -2,10 +2,46 @@
   "name": "social_network_server",
   "version": "1.0.0-Beta",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/main.js",
+    "start": "node src/main.js",
+    "swagger-autogen": "node ./src/docs/swagger.js",
+    "swag": "node swagger.js"
   },
   "author": "nguyenle",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.1",
+    "cloudinary": "^1.35.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "date-fns": "^2.29.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "express-fileupload": "^1.4.0",
+    "express-rate-limit": "^6.7.0",
+    "fs": "^0.0.1-security",
+    "helmet": "^6.0.0",
+    "hpp": "^0.2.3",
+    "http-status": "^1.5.3",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-simple": "^0.5.6",
+    "mongoose": "^6.7.3",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.8.0",
+    "openapi-validator-middleware": "^3.2.6",
+    "path": "^0.12.7",
+    "swagger-autogen": "^2.22.0",
+    "swagger-ui-express": "^4.6.0",
+    "validator": "^13.7.0",
+    "xss-clean": "^0.1.1",
+    "yamljs": "^0.3.0"
+  }
 }
