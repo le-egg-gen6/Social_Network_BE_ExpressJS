@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+import crypto from "crypto";
 
 const authSchema = new mongoose.Schema(
     {
@@ -52,5 +54,42 @@ const authSchema = new mongoose.Schema(
         timestamps: true
     }
 )
+
+authSchema.pre('save', async function(next) {
+
+    if (!this.isModified('password')) {
+        return next();
+    }
+
+    this.password = await bcrypt.hash(this.password, 10);
+
+})
+
+authSchema.methods.isValiddatedPassword() = async function(sentPassword) {
+
+    return await bcrypt.compare(sentPassword, this.password);
+
+}
+
+authSchema.methods.getForgetPasswordToken = function() {
+
+    const token = crypto.randomBytes(20).toString('hex');
+
+    this.forgotPasswordToken = crypto.createHash('sha256').update(token).digest('hex');
+
+    this.forgotPasswordExpiry = Date.now() + 20 * 60 * 1000;
+
+    return token;
+}
+
+authSchema.methods.getEmailVerificationToken = function() {
+
+    const token = crypto.randomBytes(20).toString('hex');
+
+    this.emailVerificationToken = crypto.createHash('sha256').update(token).digest('hex');
+
+    return token;
+
+}
 
 module.exports = mongoose.model('Auth', authSchema)
